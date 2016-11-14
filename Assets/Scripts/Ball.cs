@@ -14,6 +14,9 @@ public class Ball : MonoBehaviour
 	private bool hasStarted = false;
 	private Vector3 paddleToBallVector;
 	private Vector3 ballStartLocation;
+
+	// This is for the ball-squish
+	private Animator animator;
 	
 	// Use this for initialization
 	void Start () 
@@ -38,6 +41,8 @@ public class Ball : MonoBehaviour
 			this.GetComponent<Rigidbody2D>().velocity = new Vector2(5f, 10f);
 		}
 		Debug.Log("Ball count: " + count);
+
+		animator = GetComponent<Animator> ();
 		
 	}
 	
@@ -86,7 +91,13 @@ public class Ball : MonoBehaviour
 			//if (other.gameObject.GetComponent<Paddle>() && 
 			Rigidbody2D rb = GetComponent<Rigidbody2D>();
 			//Debug.Log (rb.velocity);
-			
+
+			if (other.gameObject.tag == "VerticalRebound") 
+			{
+				Debug.Log ("Hit Vertical Rebound!");
+				animator.SetTrigger ("HSquishTrigger");
+			}
+
 			if (other.gameObject.GetComponent<Paddle>())
 			{
 				//Vector2 fixMinimumVelocity;
