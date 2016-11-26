@@ -5,7 +5,9 @@ public class LumpOfCoal : MonoBehaviour
 {
 	public int pointValue = -10;
 	public float rotateRange = 0f;
-	
+	public AudioClip lumpTrumpet;
+	//public float clipVolume = 1f;
+
 	private ScoreText scoreText;
 	
 	// Use this for initialization
@@ -31,6 +33,10 @@ public class LumpOfCoal : MonoBehaviour
 		if (other.GetComponent<Paddle>())
 		{
 			Debug.Log ("Got coal!");
+
+			// Old way of playing sound
+			//AudioSource.PlayClipAtPoint(lumpTrumpet,transform.position,clipVolume);
+
 			scoreText.UpdateScore(pointValue);
 			DestroyPresent();
 		}
@@ -38,6 +44,9 @@ public class LumpOfCoal : MonoBehaviour
 	
 	void DestroyPresent()
 	{
-		Destroy(gameObject);
+		GetComponent<AudioSource> ().PlayOneShot (lumpTrumpet);
+		GetComponentInChildren<Renderer> ().enabled = false;
+
+		Destroy(gameObject,lumpTrumpet.length);
 	}
 }

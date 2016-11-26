@@ -5,6 +5,8 @@ public class PresentRed : MonoBehaviour
 {
 	public int pointValue = 10;
 	public float rotateRange = 0f;
+	public AudioClip pickUpSound;
+	//public float clipVolume;
 	
 	private GameManager gameManager;
 	private ScoreText scoreText;
@@ -31,6 +33,8 @@ public class PresentRed : MonoBehaviour
 		if (other.GetComponent<Paddle>())
 		{
 			Debug.Log ("Got present!");
+			// Old way  of doing sound
+			// AudioSource.PlayClipAtPoint(pickUpSound,transform.position,clipVolume);
 			scoreText.UpdateScore(pointValue);
 			DestroyPresent();
 		}
@@ -38,6 +42,9 @@ public class PresentRed : MonoBehaviour
 	
 	void DestroyPresent()
 	{
-		Destroy(gameObject);
+		GetComponent<AudioSource> ().PlayOneShot (pickUpSound);
+		GetComponentInChildren<Renderer> ().enabled = false;
+
+		Destroy(gameObject,pickUpSound.length);
 	}
 }
