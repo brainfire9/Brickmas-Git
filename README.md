@@ -6,7 +6,7 @@ A Christmas themed brick-breaker game developed in Unity3D Personal
 
 #Motivation
 
-Learning how Unity3D works with Gethub for source control
+Learning how Unity3D works with Github for source control
 
 #Installation
 
