@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class OptionsMenu : MonoBehaviour 
 {
 	public Text BallCount;
+	public GameObject helpMenuPrefab;
+	public Vector3 helpMenuLocation;
 	 
 	private Animator anim;
 	
@@ -30,6 +32,14 @@ public class OptionsMenu : MonoBehaviour
 	public void OptionsSlideUp()
 	{
 		anim.SetBool("SlideInMenu",false);
+	}
+
+	public void HelpMenuSlideIn()
+	{
+		// Old way of doing things
+		//Debug.Log ("Help prefab is " + helpMenuPrefab);
+		//GameObject helpMenu = Instantiate (helpMenuPrefab, helpMenuLocation, Quaternion.identity) as GameObject;
+		FindObjectOfType<HelpMenu>().Show();
 	}
 	
 	public void PauseGame()
